@@ -14,7 +14,7 @@ function setup() {
 	sun = new Planet(width/2, height/2, 20);
 
 	for(let i = 0; i < 1000; i++)
-		planets.push(new Planet(randomInt(0, width), randomInt(0, height), 1, true));
+		planets.push(new Planet(randomInt(0, width), randomInt(0, height), random(1, 1.3), true));
 }
 
 function loop() {
