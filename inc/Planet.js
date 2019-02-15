@@ -29,7 +29,7 @@ class Planet {
 	}
 
 	draw() {
-		fill(new Color(255, 255/this.mass, 255));
+		fill(new Color(255/2*this.mass, 255/2*this.mass, 255/this.mass));
 
 		circle(this.position.x, this.position.y, this.mass*5);
 	}
