@@ -1,7 +1,7 @@
 "use strict"
 
 const G = 66.74;
-
+	
 let width, height;
 
 let sun;
@@ -13,7 +13,7 @@ function setup() {
 
 	sun = new Planet(width/2, height/2, 20);
 
-	for(let i = 0; i < 50; i++)
+	for(let i = 0; i < 1000; i++)
 		planets.push(new Planet(randomInt(0, width), randomInt(0, height), 1, true));
 }
 
@@ -24,13 +24,20 @@ function loop() {
 	sun.draw();
 
 	for(let planet of planets) {
-		let squareSunDist = (planet.position.x - sun.position.x)**2 + (planet.position.y - sun.position.y)**2;
-		let gravity = Vector.substract(sun.position, planet.position);
-		gravity.setMagnitude( G*planet.mass*sun.mass/squareSunDist );
-
-		planet.applyForce( gravity );
+		applyInteractions(planet);
 		planet.update();
 		planet.draw();
 	}
 }
 
+function applyInteractions(planet) {
+	applyGravity(planet, sun);
+}
+
+function applyGravity(planet, other) {
+	let squareDist = (planet.position.x - other.position.x)**2 + (planet.position.y - other.position.y)**2;
+	let force = Vector.substract(other.position, planet.position);
+
+	force.setMagnitude( G*planet.mass*other.mass/squareDist );
+	planet.applyForce( force );
+}
